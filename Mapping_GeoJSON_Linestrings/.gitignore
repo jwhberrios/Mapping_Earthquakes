@@ -1,5 +1,5 @@
 #Ignore the config.js file.
 config.js
 
-#Ignore airport JSON file
+#Ignore the airport.json file.
 majorAirports.json
