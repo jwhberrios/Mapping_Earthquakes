@@ -10,7 +10,7 @@ attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">
 });
 
 // We create satelliteStreets tile layer that will be an option for our map.
-let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     accessToken: API_KEY
@@ -28,7 +28,13 @@ let map = L.map('mapid', {
   center: [39.5, -98.5],
   zoom: 3,
   layers: [streets]
-});
+})
+
+// Pass our map layers into our layers control and add the layers control to the map //
+//Allows user to change to view the different baseMaps created //
+L.control.layers(baseMaps).addTo(map);
+
+
 
 //Grab JSON data
 d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(data) {
@@ -86,6 +92,11 @@ pointToLayer: function(feature, latlng) {
           return L.circleMarker(latlng);
       },
     // We set the style for each circleMarker using our styleInfo function.
-    style: styleInfo  
-    }).addTo(map); 
+    style: styleInfo,
+      // We create a popup for each circleMarker to display the magnitude and
+      //  location of the earthquake after the marker has been created and styled.
+      onEachFeature: function(feature, layer) {
+      layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
+    }  
+  }).addTo(map); 
 });
