@@ -115,10 +115,11 @@ pointToLayer: function(feature, latlng) {
       position: 'bottomright'
     });
 
-    // Then add all the details for the legend
+    // Add a legend to the map//
     legend.onAdd = function () {
+    // Legend will be added to a div element on the index.html file using the DomUtil utility function//
     let div = L.DomUtil.create('div', 'info legend');
-  
+    //legend scale details//
     const magnitudes = [0, 1, 2, 3, 4, 5];
     const colors = [
       "#98ee00",
@@ -129,7 +130,7 @@ pointToLayer: function(feature, latlng) {
       "#ea2c2c"
     ];
   
-    // loop through our density intervals and generate a label with a colored square for each interval
+    // loop through our density intervals and generate a label with a colored square for each interval //
     for (var i = 0; i < magnitudes.length; i++) {
       console.log(colors[i]);
         div.innerHTML +=
