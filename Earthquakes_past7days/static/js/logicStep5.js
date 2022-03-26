@@ -117,6 +117,7 @@ pointToLayer: function(feature, latlng) {
 
     // Add a legend to the map//
     legend.onAdd = function () {
+      
     // Legend will be added to a div element on the index.html file using the DomUtil utility function//
     let div = L.DomUtil.create('div', 'info legend');
     //legend scale details//
